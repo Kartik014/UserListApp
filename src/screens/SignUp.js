@@ -3,7 +3,7 @@ import { View, TouchableOpacity, TextInput, Text, StatusBar } from 'react-native
 import auth from '@react-native-firebase/auth';
 import styles from '../Style/Styles';
 
-const signUp = () => {
+const signUp = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +17,11 @@ const signUp = () => {
             );
 
             console.log(isUserCreated);
+
+            navigation.navigate('UserList', {
+                email: isUserCreated.user.email,
+                uid: isUserCreated.user.uid,
+            });
         } catch (err) {
             console.log(err);
 
